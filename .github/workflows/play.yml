@@ -5,6 +5,8 @@ jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
       - name: Copy .env.example to .env
         run: cp .env.example .env
       - name: Generate App Key
