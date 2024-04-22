@@ -19,6 +19,8 @@ jobs:
           php-version: '8.3'
       - name: composer install
         run: composer install
+      - name: npm install
+        run: npm install
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
