@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: test2
 on: [push]
 
 jobs:
@@ -7,6 +7,12 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Setup PHP with PECL extension
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: composer install
+        run: composer install
       - name: Copy .env.example to .env
         run: cp .env.example .env
       - name: Generate App Key
