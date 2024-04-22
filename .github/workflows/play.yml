@@ -5,13 +5,17 @@ jobs:
   hello-world:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Environment
-        run: |
-          cp .env.example .env &&
-          php artisan key:generate &&
-          touch database/database.sqlite &&
-          php artisan migrate &&
-          npm ci &&
-          npm run build
+      - name: Copy .env.example to .env
+        run: cp .env.example .env
+      - name: Generate App Key
+        run: php artisan key:generate
+      - name: Create SQLite Database
+        run: touch database/database.sqlite
+      - name: Run Database Migrations
+        run: php artisan migrate
+      - name: Install npm dependencies
+        run: npm ci
+      - name: Build assets
+        run: npm run build
       - name: Serve Application
         run: php artisan serve --host=0.0.0.0 --port=8000
