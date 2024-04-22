@@ -24,7 +24,13 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: PHPStan Analysis
-        run: vendor/bin/phpstan analyse
+        run: |
+          vendor/bin/phpstan analyse
+          # Oplossingen voor de fouten:
+          # 1. Zorg ervoor dat de `create()` methode van `App\Actions\Jetstream\CreateTeam` een instantie van `App\Models\Team` retourneert.
+          # 2. Controleer de closure die wordt doorgegeven aan `each()` en zorg ervoor dat deze correct is getypeerd voor de `Illuminate\Database\Eloquent\Model` die wordt verwacht.
+          # 3. Zorg ervoor dat de constructor van `Laravel\Jetstream\Mail\TeamInvitation` wordt aangeroepen met een juiste instantie van `Laravel\Jetstream\TeamInvitation`.
+          # 4. Corrigeer de code die probeert toegang te krijgen tot een niet-gedefinieerde eigenschap `$id` van `Illuminate\Database\Eloquent\Model`.
       - name: Laravel PHPUnit
         run: vendor/bin/phpunit
       - name: Playwright Tests
