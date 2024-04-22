@@ -1,0 +1,17 @@
+name: GitHub Actions Demo
+on: [push]
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Environment
+        run: |
+          cp .env.example .env &&
+          php artisan key:generate &&
+          touch database/database.sqlite &&
+          php artisan migrate &&
+          npm ci &&
+          npm run build
+      - name: Serve Application
+        run: php artisan serve --host=0.0.0.0 --port=8000
