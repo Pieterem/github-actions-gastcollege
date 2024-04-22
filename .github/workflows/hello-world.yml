@@ -21,6 +21,7 @@ jobs:
         run: composer install
       - name: npm install
         run: npm install
+      - run: npx playwright install
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
